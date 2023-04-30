@@ -12,8 +12,14 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
     [Binding]
     public class ElementsStepDefinitions
     {
-        IWebDriver driver;
-        private readonly ElementsPage elementsPage;
+        private IWebDriver driver;
+        private ElementsPage elementsPage;
+
+        public ElementsStepDefinitions(Hooks hooks)
+        {
+            driver = hooks.GetDriver();
+            elementsPage = new ElementsPage(driver);
+        }
 
 
         [When(@"User fills the fields with the following values:")]

@@ -11,19 +11,24 @@ namespace SpecFlowQDProject_BDD.PageObjects
     public class ElementsPage
     {
 
-        private readonly IWebDriver driver;
+        private IWebDriver driver;
 
         public ElementsPage(IWebDriver driver)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException(nameof(driver));
+            }
+
             this.driver = driver;
         }
 
         //text box elements
-        private IWebElement FullName => driver.FindElement(By.XPath("//input[@id='userName']"));
-        private IWebElement Email => driver.FindElement(By.XPath("//input[@id='userEmail']"));
-        private IWebElement CurrentAddress => driver.FindElement(By.XPath("//textarea[@id='currentAddress']"));
-        private IWebElement PermanentAddress => driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
-        private IWebElement SubmitButton => driver.FindElement(By.XPath("//button[@id='submit']"));
+        public IWebElement FullName => driver.FindElement(By.XPath("//input[@id='userName']"));
+        public IWebElement Email => driver.FindElement(By.XPath("//input[@id='userEmail']"));
+        public IWebElement CurrentAddress => driver.FindElement(By.XPath("//textarea[@id='currentAddress']"));
+        public IWebElement PermanentAddress => driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
+        public IWebElement SubmitButton => driver.FindElement(By.XPath("//button[@id='submit']"));
 
         public void FillTextBoxForm(Table table)
         {
@@ -44,5 +49,7 @@ namespace SpecFlowQDProject_BDD.PageObjects
         }
 
         public IList<IWebElement> TableRows => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));
+
+
     }
 }

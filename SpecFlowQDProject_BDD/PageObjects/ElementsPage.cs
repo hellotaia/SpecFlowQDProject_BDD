@@ -1,55 +1,86 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow;
 
 namespace SpecFlowQDProject_BDD.PageObjects
 {
-    public class ElementsPage
+    public class ElementsPage : BasePage
     {
 
-        private IWebDriver driver;
-
-        public ElementsPage(IWebDriver driver)
+        public ElementsPage(IWebDriver driver) :base(driver)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException(nameof(driver));
-            }
-
-            this.driver = driver;
         }
 
         //text box elements
-        public IWebElement FullName => driver.FindElement(By.XPath("//input[@id='userName']"));
-        public IWebElement Email => driver.FindElement(By.XPath("//input[@id='userEmail']"));
-        public IWebElement CurrentAddress => driver.FindElement(By.XPath("//textarea[@id='currentAddress']"));
-        public IWebElement PermanentAddress => driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
-        public IWebElement SubmitButton => driver.FindElement(By.XPath("//button[@id='submit']"));
+        private IWebElement FullName => driver.FindElement(By.XPath("//input[@id='userName']"));
+        private IWebElement Email => driver.FindElement(By.XPath("//input[@id='userEmail']"));
+        private IWebElement CurrentAddress => driver.FindElement(By.XPath("//textarea[@id='currentAddress']"));
+        private IWebElement PermanentAddress => driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
+        private IWebElement SubmitButton => driver.FindElement(By.XPath("//button[@id='submit']"));
+        private IList<IWebElement> TableRowsLocator => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));
+        private IWebElement PageTitleLocator => driver.FindElement(By.XPath($"//div[@class='main-header']"));
+        private IWebElement MenuButtonLocator(string buttonName) => driver.FindElement(By.XPath($"//span[text()='{buttonName}']"));
+        private IWebElement ButtonByNameLocator(string buttonName) => driver.FindElement(By.XPath($"//button[text()='{buttonName}']"));
 
-        public void FillTextBoxForm(Table table)
+        public ElementsPage FillTextBoxForm(Table tableData)
         {
-            var fullName = table.Rows[0]["Full Name"];
-            var email = table.Rows[0]["Email"];
-            var currentAddress = table.Rows[0]["Current Address"];
-            var permanentAddress = table.Rows[0]["Permanent Address"];
+            var expectedData = tableData.Rows[0];
+            var fullName = expectedData["Full Name"];
+            var email = expectedData["Email"];
+            var currentAddress = expectedData["Current Address"];
+            var permanentAddress = expectedData["Permanent Address"];
 
  
             FullName.SendKeys(fullName);
-
             Email.SendKeys(email);
-
             CurrentAddress.SendKeys(currentAddress);
- 
             PermanentAddress.SendKeys(permanentAddress);
-
+            return this;
         }
 
-        public IList<IWebElement> TableRows => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));
+        public ElementsPage VerifyPageTitle(string expectedPageName)
+        {
+            string actualTitle = PageTitleLocator.Text;
+            Assert.AreEqual(expectedPageName, actualTitle, "Titles are not equal");
+            return this;
+        }
 
+        public ElementsPage VerifyDataAtTheTable(Table expectedData)
+        {
+            var expectedTableRows = expectedData.Rows;
+            var actualTableRows = TableRowsLocator;
 
+            Assert.AreEqual(expectedTableRows.Count, actualTableRows.Count);
+
+            for (int i = 0; i < expectedTableRows.Count; i++)
+            {
+                var expectedRow = expectedTableRows[i];
+                var actualRowCells = actualTableRows[i].FindElements(By.TagName("td"));
+
+                Assert.AreEqual(expectedRow["FullName"], actualRowCells[0].Text);
+                Assert.AreEqual(expectedRow["Email"], actualRowCells[1].Text);
+                Assert.AreEqual(expectedRow["Current Address"], actualRowCells[2].Text);
+                Assert.AreEqual(expectedRow["Permanent Address"], actualRowCells[3].Text);
+            }
+            return this;
+        }
+
+        public ElementsPage ClickOnMenuButton(string menuButtonName)
+        {
+            MenuButtonLocator(menuButtonName).Click();
+            return this;
+        }
+
+        public ElementsPage ClickButton(string buttonName)
+        {
+            ButtonByNameLocator(buttonName).Click();
+            return this;
+        }
     }
 }

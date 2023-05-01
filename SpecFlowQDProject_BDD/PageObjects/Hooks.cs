@@ -1,42 +1,35 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
 using NUnit.Framework;
-using SpecFlow;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Chrome;
+using BoDi;
 
 namespace SpecFlowQDProject_BDD.PageObjects
 {
+    [Binding]
     public class Hooks
     {
-        private IWebDriver driver;
-        public Hooks(IWebDriver driver)
+        protected IWebDriver driver;
+        private readonly IObjectContainer container;
+
+        public Hooks(IObjectContainer container)
         {
-            this.driver = driver;
-            driver = new ChromeDriver();
+            this.container = container;
         }
 
         [BeforeScenario]
-        public void BeforeScenario()
+        public void GetDriver()
         {
             driver = new ChromeDriver();
+            container.RegisterInstanceAs(driver);
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
+            IWebDriver driver = container.Resolve<IWebDriver>();
             driver.Quit();
         }
 
-        public IWebDriver GetDriver()
-        {
-            return driver;
-        }
+        
     }
 }

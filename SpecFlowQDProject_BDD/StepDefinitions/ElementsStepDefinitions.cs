@@ -12,41 +12,45 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
     [Binding]
     public class ElementsStepDefinitions
     {
-        private IWebDriver driver;
-        private ElementsPage elementsPage;
+        private IWebDriver _driver;
+        private ElementsPage _elementsPage;
 
-        public ElementsStepDefinitions(Hooks hooks)
+        public ElementsStepDefinitions(IWebDriver driver)
         {
-            driver = hooks.GetDriver();
-            elementsPage = new ElementsPage(driver);
+            _driver = driver; 
+            _elementsPage = new ElementsPage(_driver);
         }
 
+
+        [Then(@"'([^']*)' page is displayed")]
+        public void ThenPageIsDisplayed(string pageName)
+        {
+            _elementsPage.VerifyPageTitle(pageName);
+
+        }
 
         [When(@"User fills the fields with the following values:")]
         public void WhenUserFillsTheFieldsWithTheFollowingValues(Table table)
         {
-            elementsPage.FillTextBoxForm(table);
+            _elementsPage.FillTextBoxForm(table);
         }
 
 
         [Then(@"the following table is in the response")]
-        public void ThenTheFollowingTableIsInTheResponse(Table table)
+        public void ThenTheFollowingTableIsInTheResponse(Table expectedData)
         {
-            var expectedTableRows = table.Rows;
-            var actualTableRows = elementsPage.TableRows;
+            _elementsPage.VerifyDataAtTheTable(expectedData); 
+        }
 
-            Assert.AreEqual(expectedTableRows.Count, actualTableRows.Count);
-
-            for (int i = 0; i < expectedTableRows.Count; i++)
-            {
-                var expectedRow = expectedTableRows[i];
-                var actualRowCells = actualTableRows[i].FindElements(By.TagName("td"));
-
-                Assert.AreEqual(expectedRow["FullName"], actualRowCells[0].Text);
-                Assert.AreEqual(expectedRow["Email"], actualRowCells[1].Text);
-                Assert.AreEqual(expectedRow["Current Address"], actualRowCells[2].Text);
-                Assert.AreEqual(expectedRow["Permanent Address"], actualRowCells[3].Text);
-            }
+        [When(@"User clicks '([^']*)' menu button")]
+        public void WhenUserClicksMenuButton(string menuButton)
+        {
+            _elementsPage.ClickOnMenuButton(menuButton);
+        }
+        [When(@"User clicks '([^']*)' button")]
+        public void WhenUserClicksButton(string button)
+        {
+            _elementsPage.ClickButton(button);
         }
     }
 }

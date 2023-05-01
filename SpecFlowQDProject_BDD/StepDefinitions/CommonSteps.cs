@@ -1,57 +1,36 @@
-﻿using NuGet.Frameworks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SpecFlowQDProject_BDD.PageObjects;
 
 namespace SpecFlowQDProject_BDD.StepDefinitions
 {
     [Binding]
-    internal class CommonSteps
+    public class CommonSteps
     {
 
-        private IWebDriver driver;
-        private string homePage = "https://demoqa.com/";
+        private readonly IWebDriver _driver;
+       
+        private readonly HomePage _homePage;
 
-
-
-        [Given(@"User navigates to '([^']*)'")]
-        public void GivenUserNavigatesTo(string url)
+        public CommonSteps(IWebDriver driver) 
         {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(url);
+            _driver = driver;
+            _homePage = new HomePage(_driver);
         }
 
+        [Given(@"User navigates to '([^']*)'")]
+        public void GivenUserNavigatesTo(string pageUrl)
+        {
+            _homePage.NavigateToPage(pageUrl);
+            
+        }
+
+        [Given(@"User choose '([^']*)' category")]
         [When(@"User choose '([^']*)' category")]
         public void WhenUserChooseCategory(string category)
         {
-            IWebElement categoryChoosen = driver.FindElement(By.XPath($"//div/h5[text()='{category}']"));
-            categoryChoosen.Click();
+            _homePage.ClickOnCategory(category);
         }
 
-        [When(@"User clicks '([^']*)' menu button")]
-        public void WhenUserClicksMenuButton(string menuButton)
-        {
-            IWebElement menuClick = driver.FindElement(By.XPath($"//span[text()='{menuButton}']"));
-            menuClick.Click();
-        }
-        [When(@"User clicks '([^']*)' button")]
-        public void WhenUserClicksButton(string button)
-        {
-            IWebElement buttonToClick = driver.FindElement(By.XPath($"//button[text()='{button}']"));
-            buttonToClick.Click();
-        }
-
-        [Then(@"'([^']*)' page is displayed")]
-        public void ThenPageIsDisplayed(string page)
-        {
-            string expectedTitle = page;
-            string actualTitle = driver.FindElement(By.XPath($"//div[@class='main-header']")).Text;
-            Assert.AreEqual(actualTitle,expectedTitle,"Titles are not equal");
-        }
     }
 }

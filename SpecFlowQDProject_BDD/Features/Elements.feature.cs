@@ -138,15 +138,13 @@ this.FeatureBackground();
  testRunner.And("User clicks \'Submit\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "FullName",
-                            "Email",
-                            "Current Address",
-                            "Permanent Address"});
+                            "Name:test"});
                 table2.AddRow(new string[] {
-                            "test",
-                            "test@test.com",
-                            "test address",
-                            "test permAddress"});
+                            "Email:test@email.com"});
+                table2.AddRow(new string[] {
+                            "Current Address :test ad"});
+                table2.AddRow(new string[] {
+                            "Permananet Address :test permAd"});
 #line 22
  testRunner.Then("the following table is in the response", ((string)(null)), table2, "Then ");
 #line hidden

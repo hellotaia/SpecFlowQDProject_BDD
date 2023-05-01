@@ -4,21 +4,23 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using TechTalk.SpecFlow;
 using SpecFlowQDProject_BDD.PageObjects;
+using System.Linq;
+
+
 
 namespace SpecFlowQDProject_BDD.StepDefinitions
 {
     [Binding]
     public class ElementsStepDefinitions
     {
-        private IWebDriver driver;
+
         private ElementsPage elementsPage;
 
         public ElementsStepDefinitions(Hooks hooks)
         {
-            driver = hooks.GetDriver();
-            elementsPage = new ElementsPage(driver);
+
+            elementsPage = new ElementsPage(hooks.Driver);
         }
 
 
@@ -30,23 +32,11 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
 
 
         [Then(@"the following table is in the response")]
-        public void ThenTheFollowingTableIsInTheResponse(Table table)
+        public void ThenTheFollowingTableIsInTheResponse(Table expectedTable)
         {
-            var expectedTableRows = table.Rows;
-            var actualTableRows = elementsPage.TableRows;
 
-            Assert.AreEqual(expectedTableRows.Count, actualTableRows.Count);
-
-            for (int i = 0; i < expectedTableRows.Count; i++)
-            {
-                var expectedRow = expectedTableRows[i];
-                var actualRowCells = actualTableRows[i].FindElements(By.TagName("td"));
-
-                Assert.AreEqual(expectedRow["FullName"], actualRowCells[0].Text);
-                Assert.AreEqual(expectedRow["Email"], actualRowCells[1].Text);
-                Assert.AreEqual(expectedRow["Current Address"], actualRowCells[2].Text);
-                Assert.AreEqual(expectedRow["Permanent Address"], actualRowCells[3].Text);
-            }
+            Table actualTable = elementsPage.GetTableData();
+            Assert.AreEqual(expectedTable, actualTable, "The actual table data does not match the expected table data.");
         }
     }
 }

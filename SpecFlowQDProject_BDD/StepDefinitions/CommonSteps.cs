@@ -17,12 +17,15 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
         private IWebDriver driver;
         private string homePage = "https://demoqa.com/";
 
-
+        internal CommonSteps(Hooks hooks) 
+        {
+            driver = hooks.Driver;
+        }
+        
 
         [Given(@"User navigates to '([^']*)'")]
         public void GivenUserNavigatesTo(string url)
         {
-            driver = new ChromeDriver();
             driver.Navigate().GoToUrl(url);
         }
 

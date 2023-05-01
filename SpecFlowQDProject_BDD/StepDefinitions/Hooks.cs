@@ -9,34 +9,35 @@ using TechTalk.SpecFlow;
 using NUnit.Framework;
 using SpecFlow;
 using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Chrome;
 
-namespace SpecFlowQDProject_BDD.PageObjects
+namespace SpecFlowQDProject_BDD.StepDefinitions
 {
     public class Hooks
     {
-        private IWebDriver driver;
-        public Hooks(IWebDriver driver)
+        private IWebDriver _driver;
+        public Hooks()
         {
-            this.driver = driver;
-            driver = new ChromeDriver();
+            this._driver = new ChromeDriver();
+
         }
 
-        [BeforeScenario]
+        public IWebDriver Driver => _driver;
+
+/*        [BeforeScenario]
         public void BeforeScenario()
         {
             driver = new ChromeDriver();
         }
-
+*/
         [AfterScenario]
         public void AfterScenario()
         {
-            driver.Quit();
+            Driver.Quit();
         }
 
         public IWebDriver GetDriver()
         {
-            return driver;
+            return Driver;
         }
     }
 }

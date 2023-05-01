@@ -1,10 +1,12 @@
 ﻿using OpenQA.Selenium;
+using SpecFlowQDProject_BDD.StepDefinitions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow;
 
 namespace SpecFlowQDProject_BDD.PageObjects
 {
@@ -48,7 +50,35 @@ namespace SpecFlowQDProject_BDD.PageObjects
 
         }
 
-        public IList<IWebElement> TableRows => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));
+        /*public IList<IWebElement> TableRows => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));*/
+
+        public Table GetTableData()
+        {
+            var tElement = driver.FindElement(By.Id("output")).Text;
+
+            var tableRows = tElement.Split("\n");
+            for (int i = 0; i < tableRows.Length; i++)
+            {
+                tableRows[i] = tableRows[i].Trim();
+            }
+            var tableColumns = tableRows[0].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToList();
+
+            var table = new Table(tableColumns.ToArray());
+
+            for (int i = 1; i < tableRows.Length; i++)
+            {
+                var tableRowValues = tableRows[i].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToArray();
+                table.AddRow(tableRowValues);
+            }
+
+            return table;
+        }
+
+
+
+
+
+
 
 
     }

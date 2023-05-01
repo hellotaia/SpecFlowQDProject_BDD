@@ -20,5 +20,7 @@ Scenario: Verify that all the filled data is equal to displayed
 	And User clicks 'Submit' button
 # Проверяем что все данные в появившейся таблице равны ранее введенным.
 	Then the following table is in the response
-	| FullName | Email         | Current Address | Permanent Address |
-	| test     | test@test.com | test address    | test permAddress  |
+	| Name:test                       |
+	| Email:test@email.com            |
+	| Current Address :test ad        |
+	| Permananet Address :test permAd |

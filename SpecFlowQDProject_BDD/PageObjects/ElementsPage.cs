@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using NUnit.Framework;
 using SpecFlowQDProject_BDD.StepDefinitions;
 using System;
 using System.Collections.Generic;
@@ -7,22 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using System.Security.Cryptography.X509Certificates;
+using System.Xml.Linq;
 
 namespace SpecFlowQDProject_BDD.PageObjects
 {
-    public class ElementsPage
+    public class ElementsPage : BasePage
     {
-
-        private IWebDriver driver;
-
-        public ElementsPage(IWebDriver driver)
+        public ElementsPage(IWebDriver driver):base(driver)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException(nameof(driver));
-            }
-
-            this.driver = driver;
         }
 
         //text box elements
@@ -32,54 +26,77 @@ namespace SpecFlowQDProject_BDD.PageObjects
         public IWebElement PermanentAddress => driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
         public IWebElement SubmitButton => driver.FindElement(By.XPath("//button[@id='submit']"));
 
-        public void FillTextBoxForm(Table table)
+        private IList<IWebElement> TableRowsLocator => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));
+
+        public ElementsPage FillTextBoxForm(Table tableData)
         {
-            var fullName = table.Rows[0]["Full Name"];
-            var email = table.Rows[0]["Email"];
-            var currentAddress = table.Rows[0]["Current Address"];
-            var permanentAddress = table.Rows[0]["Permanent Address"];
+            var expectedData = tableData.Rows[0];
+            var fullName = expectedData["Full Name"];
+            var email = expectedData["Email"];
+            var currentAddress = expectedData["Current Address"];
+            var permanentAddress = expectedData["Permanent Address"];
 
- 
             FullName.SendKeys(fullName);
-
             Email.SendKeys(email);
-
             CurrentAddress.SendKeys(currentAddress);
- 
             PermanentAddress.SendKeys(permanentAddress);
 
+            return this;
         }
 
-        /*public IList<IWebElement> TableRows => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));*/
-
-        public Table GetTableData()
+        public ElementsPage VerifyDataAtTheTable(Table expectedData)
         {
-            var tElement = driver.FindElement(By.Id("output")).Text;
+            var expectedTableRows = expectedData.Rows;
+            var actualTableRows = TableRowsLocator;
 
-            var tableRows = tElement.Split("\n");
-            for (int i = 0; i < tableRows.Length; i++)
+            Assert.AreEqual(expectedTableRows.Count, actualTableRows.Count);
+
+            for (int i = 0; i < expectedTableRows.Count; i++)
             {
-                tableRows[i] = tableRows[i].Trim();
+                var expectedRow = expectedTableRows[i];
+                var actualRowCells = actualTableRows[i].FindElements(By.TagName("td"));
+
+                Assert.AreEqual(expectedRow["FullName"], actualRowCells[0].Text);
+                Assert.AreEqual(expectedRow["Email"], actualRowCells[1].Text);
+                Assert.AreEqual(expectedRow["Current Address"], actualRowCells[2].Text);
+                Assert.AreEqual(expectedRow["Permanent Address"], actualRowCells[3].Text);
             }
-            var tableColumns = tableRows[0].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToList();
-
-            var table = new Table(tableColumns.ToArray());
-
-            for (int i = 1; i < tableRows.Length; i++)
-            {
-                var tableRowValues = tableRows[i].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToArray();
-                table.AddRow(tableRowValues);
-            }
-
-            return table;
+            return this;
         }
 
+       
+        //check box elements
+        private IWebElement FolderLocator(string folderName) => 
+            driver.FindElement(By.XPath($"//span[text()='{folderName}']"));
+        private IWebElement ToggleLocator(string folderName) => 
+            driver.FindElement(By.XPath($"//span[text()='{folderName}']/ancestor::li[1]/span/button"));
 
+        private IList<IWebElement> SelectResultLocator => driver.FindElements(By.XPath("//div[@id='result']/span[text()]"));
 
+        public ElementsPage ClickFolderName(string folderName)
+        {
+            FolderLocator(folderName).Click();
+            return this;
+        }
 
+        public ElementsPage ClickToggleName (string folderName)
+        {
+            ToggleLocator(folderName).Click(); 
+            return this;
+        }
 
-
-
+        public ElementsPage CheckSelectResults(string expectedSelected)
+        {
+            var expectedString = expectedSelected;
+            List<string> elementTexts = new List<string>();
+            foreach (IWebElement element in SelectResultLocator)
+            {
+                elementTexts.Add(element.Text);
+            }
+            string actualString = string.Join(" ", elementTexts);
+            Assert.AreEqual(expectedString, actualString);
+            return this;
+        }
 
     }
 }

@@ -14,29 +14,46 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
     [Binding]
     public class ElementsStepDefinitions
     {
+        private IWebDriver _driver;
+        private ElementsPage _elementsPage;
 
-        private ElementsPage elementsPage;
-
-        public ElementsStepDefinitions(Hooks hooks)
+        public ElementsStepDefinitions(IWebDriver driver)
         {
-
-            elementsPage = new ElementsPage(hooks.Driver);
+            _driver = driver;
+            _elementsPage = new ElementsPage(_driver);
         }
 
 
         [When(@"User fills the fields with the following values:")]
         public void WhenUserFillsTheFieldsWithTheFollowingValues(Table table)
         {
-            elementsPage.FillTextBoxForm(table);
+          _elementsPage.FillTextBoxForm(table);
         }
 
 
         [Then(@"the following table is in the response")]
-        public void ThenTheFollowingTableIsInTheResponse(Table expectedTable)
+        public void ThenTheFollowingTableIsInTheResponse(Table expectedData)
         {
-
-            Table actualTable = elementsPage.GetTableData();
-            Assert.AreEqual(expectedTable, actualTable, "The actual table data does not match the expected table data.");
+            _elementsPage.VerifyDataAtTheTable(expectedData);
         }
+
+        [When(@"User selects '([^']*)' folder")]
+        public void WhenUserSelectsFolder(string folderName)
+        {
+            _elementsPage.ClickFolderName(folderName);
+        }
+
+        [When(@"User expands '([^']*)' folder")]
+        public void WhenUserExpandsFolder(string folderName)
+        {
+            _elementsPage.ClickToggleName(folderName);
+        }
+
+        [Then(@"User verifies that '([^']*)' is displayed for selected results")]
+        public void ThenUserVerifiesThatIsDisplayedForSelectedResults(string results)
+        {
+            _elementsPage.CheckSelectResults(results);
+        }
+
     }
 }

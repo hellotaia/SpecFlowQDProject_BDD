@@ -1,15 +1,6 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using BoDi;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-using NUnit.Framework;
-using SpecFlow;
-using OpenQA.Selenium.Edge;
-using BoDi;
+using OpenQA.Selenium.Chrome;
 
 namespace SpecFlowQDProject_BDD.PageObjects
 {
@@ -31,11 +22,11 @@ namespace SpecFlowQDProject_BDD.PageObjects
             container.RegisterInstanceAs(driver);
         }
 
-        /*[AfterScenario]
+        [AfterScenario]
         public void AfterScenario()
         {
             IWebDriver driver = container.Resolve<IWebDriver>();
             driver.Quit();
-        }*/
+        }
     }
 }

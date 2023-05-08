@@ -6,13 +6,13 @@ Tests perfomed for: text box, check box, web tables, buttons subpages
 Background: Navigate to Elements Categoty page
 Given User navigates to 'https://demoqa.com/'
 
-Scenario: Verify Elements Page title
+Scenario: Elements Verify Elements Page title
 Given User choose 'Elements' category
 Then 'Elements' page is displayed
 
 ## Раздел Text Box
 @textbox
-Scenario: Verify that all the filled data is equal to displayed
+Scenario: Text Box - Verify that all the filled data is equal to displayed
 # Заполняем все поля корректными данными. Кликаем по Submit. 
 Given User choose 'Elements' category
 When User clicks 'Text Box' menu button
@@ -23,18 +23,20 @@ When User fills the fields with the following values:
 And User clicks 'Submit' button
 # Проверяем что все данные в появившейся таблице равны ранее введенным.
 Then the following table is in the response
-| Full Name | Email          | Current Address | Permanent Address |
-| test      | test@email.com | test ad         | test permAd       |
+| Name:test                       |
+| Email:test@email.com            |
+| Current Address :test ad        |
+| Permananet Address :test permAd |
 
 ## Раздел Check Box
 @checkbox
-Scenario: Verify Chexbox Page title
+Scenario: Check Box - Verify Chexbox Page title
 Given User choose 'Elements' category
 When User clicks 'Check Box' menu button
 Then 'Check Box' page is displayed
 
 @checkbox
-Scenario: Verify that selected elements are displayed as text
+Scenario: Check Box - Verify that selected elements are displayed as text
 Given User choose 'Elements' category
 When User clicks 'Check Box' menu button
 Then 'Check Box' page is displayed
@@ -62,16 +64,22 @@ Then User verifies that 'You have selected : desktop notes commands angular veu 
 
 ## Раздел Web Tables
 @webtables
-Scenario: Verify WebTables Page title
+Scenario: Web Tables - Verify WebTables Page title
 Given User choose 'Elements' category
 When User clicks 'Web Tables' menu button
 Then 'Web Tables' page is displayed
 
 @webtables
-Scenario: Verify that Salary column is displaying in ascending order
+Scenario: Web Tables - Verify that Salary column is displaying in ascending order
+Given User choose 'Elements' category
+When User clicks 'Web Tables' menu button
+Then 'Web Tables' page is displayed
+#When User verifies that table contais the following columns
+#| First Name | Last Name | Age | Email | Salary | Department | Action |
 # Кликнуть по столбцу Salary. 
-
+When User clicks 'Salary' column header
 # Проверить что значения в столбце Salary расположены по возрастанию.
+Then User verifies that 'Salary' coulumn values are sorted in ascending order
 
 
 @webtables

@@ -1,13 +1,5 @@
-﻿using NuGet.Frameworks;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
 using SpecFlowQDProject_BDD.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpecFlowQDProject_BDD.StepDefinitions
 {

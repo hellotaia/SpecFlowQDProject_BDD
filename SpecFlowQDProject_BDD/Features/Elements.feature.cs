@@ -88,12 +88,12 @@ testRunner.Given("User navigates to \'https://demoqa.com/\'", ((string)(null)), 
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify Elements Page title")]
-        public void VerifyElementsPageTitle()
+        [NUnit.Framework.DescriptionAttribute("Elements Verify Elements Page title")]
+        public void ElementsVerifyElementsPageTitle()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Elements Page title", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Elements Verify Elements Page title", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -118,14 +118,14 @@ testRunner.Then("\'Elements\' page is displayed", ((string)(null)), ((TechTalk.S
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify that all the filled data is equal to displayed")]
+        [NUnit.Framework.DescriptionAttribute("Text Box - Verify that all the filled data is equal to displayed")]
         [NUnit.Framework.CategoryAttribute("textbox")]
-        public void VerifyThatAllTheFilledDataIsEqualToDisplayed()
+        public void TextBox_VerifyThatAllTheFilledDataIsEqualToDisplayed()
         {
             string[] tagsOfScenario = new string[] {
                     "textbox"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify that all the filled data is equal to displayed", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Text Box - Verify that all the filled data is equal to displayed", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 15
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -165,15 +165,13 @@ testRunner.When("User fills the fields with the following values:", ((string)(nu
 testRunner.And("User clicks \'Submit\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Full Name",
-                            "Email",
-                            "Current Address",
-                            "Permanent Address"});
+                            "Name:test"});
                 table2.AddRow(new string[] {
-                            "test",
-                            "test@email.com",
-                            "test ad",
-                            "test permAd"});
+                            "Email:test@email.com"});
+                table2.AddRow(new string[] {
+                            "Current Address :test ad"});
+                table2.AddRow(new string[] {
+                            "Permananet Address :test permAd"});
 #line 25
 testRunner.Then("the following table is in the response", ((string)(null)), table2, "Then ");
 #line hidden
@@ -182,15 +180,15 @@ testRunner.Then("the following table is in the response", ((string)(null)), tabl
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify Chexbox Page title")]
+        [NUnit.Framework.DescriptionAttribute("Check Box - Verify Chexbox Page title")]
         [NUnit.Framework.CategoryAttribute("checkbox")]
-        public void VerifyChexboxPageTitle()
+        public void CheckBox_VerifyChexboxPageTitle()
         {
             string[] tagsOfScenario = new string[] {
                     "checkbox"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Chexbox Page title", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 31
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check Box - Verify Chexbox Page title", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 33
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -203,13 +201,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 32
+#line 34
 testRunner.Given("User choose \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 33
+#line 35
 testRunner.When("User clicks \'Check Box\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 34
+#line 36
 testRunner.Then("\'Check Box\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -217,15 +215,15 @@ testRunner.Then("\'Check Box\' page is displayed", ((string)(null)), ((TechTalk.
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify that selected elements are displayed as text")]
+        [NUnit.Framework.DescriptionAttribute("Check Box - Verify that selected elements are displayed as text")]
         [NUnit.Framework.CategoryAttribute("checkbox")]
-        public void VerifyThatSelectedElementsAreDisplayedAsText()
+        public void CheckBox_VerifyThatSelectedElementsAreDisplayedAsText()
         {
             string[] tagsOfScenario = new string[] {
                     "checkbox"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify that selected elements are displayed as text", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 37
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check Box - Verify that selected elements are displayed as text", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 39
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -238,59 +236,59 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 38
+#line 40
 testRunner.Given("User choose \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 39
+#line 41
 testRunner.When("User clicks \'Check Box\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 40
+#line 42
 testRunner.Then("\'Check Box\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 42
+#line 44
 testRunner.When("User expands \'Home\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 44
+#line 46
 testRunner.And("User selects \'Desktop\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 45
+#line 47
 testRunner.Then("User verifies that \'You have selected : desktop notes commands\' is displayed for " +
                         "selected results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 46
+#line 48
 testRunner.When("User expands \'Documents\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 48
+#line 50
 testRunner.And("User expands \'WorkSpace\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 49
+#line 51
 testRunner.And("User selects \'Angular\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 50
+#line 52
 testRunner.And("User selects \'Veu\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 52
+#line 54
 testRunner.And("User expands \'Office\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 53
+#line 55
 testRunner.And("User selects \'Public\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 54
+#line 56
 testRunner.And("User selects \'Private\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 55
+#line 57
 testRunner.And("User selects \'Classified\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 56
+#line 58
 testRunner.And("User selects \'General\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 58
+#line 60
 testRunner.And("User expands \'Downloads\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 59
+#line 61
 testRunner.And("User selects \'Downloads\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 61
+#line 63
 testRunner.Then("User verifies that \'You have selected : desktop notes commands angular veu office" +
                         " public private classified general downloads wordFile excelFile\' is displayed fo" +
                         "r selected results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -300,15 +298,15 @@ testRunner.Then("User verifies that \'You have selected : desktop notes commands
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify WebTables Page title")]
+        [NUnit.Framework.DescriptionAttribute("Web Tables - Verify WebTables Page title")]
         [NUnit.Framework.CategoryAttribute("webtables")]
-        public void VerifyWebTablesPageTitle()
+        public void WebTables_VerifyWebTablesPageTitle()
         {
             string[] tagsOfScenario = new string[] {
                     "webtables"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify WebTables Page title", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 65
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Web Tables - Verify WebTables Page title", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 67
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -321,13 +319,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 66
+#line 68
 testRunner.Given("User choose \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 67
+#line 69
 testRunner.When("User clicks \'Web Tables\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 68
+#line 70
 testRunner.Then("\'Web Tables\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -335,15 +333,15 @@ testRunner.Then("\'Web Tables\' page is displayed", ((string)(null)), ((TechTalk
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify that Salary column is displaying in ascending order")]
+        [NUnit.Framework.DescriptionAttribute("Web Tables - Verify that Salary column is displaying in ascending order")]
         [NUnit.Framework.CategoryAttribute("webtables")]
-        public void VerifyThatSalaryColumnIsDisplayingInAscendingOrder()
+        public void WebTables_VerifyThatSalaryColumnIsDisplayingInAscendingOrder()
         {
             string[] tagsOfScenario = new string[] {
                     "webtables"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify that Salary column is displaying in ascending order", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 71
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Web Tables - Verify that Salary column is displaying in ascending order", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 73
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -355,6 +353,21 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 6
 this.FeatureBackground();
+#line hidden
+#line 74
+testRunner.Given("User choose \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 75
+testRunner.When("User clicks \'Web Tables\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 76
+testRunner.Then("\'Web Tables\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 80
+testRunner.When("User clicks \'Salary\' column header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 82
+testRunner.Then("User verifies that \'Salary\' coulumn values are sorted in ascending order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -369,7 +382,7 @@ this.FeatureBackground();
                     "webtables"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify deleting rows", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 78
+#line 86
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -395,7 +408,7 @@ this.FeatureBackground();
                     "buttons"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BBBBBB", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 88
+#line 96
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))

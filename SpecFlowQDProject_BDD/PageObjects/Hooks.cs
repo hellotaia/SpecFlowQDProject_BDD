@@ -22,11 +22,11 @@ namespace SpecFlowQDProject_BDD.PageObjects
             container.RegisterInstanceAs(driver);
         }
 
-        [AfterScenario]
-        public void AfterScenario()
-        {
-            IWebDriver driver = container.Resolve<IWebDriver>();
-            driver.Quit();
-        }
+        //[AfterScenario]
+        //public void AfterScenario()
+        //{
+        //    IWebDriver driver = container.Resolve<IWebDriver>();
+        //    driver.Quit();
+        //}
     }
 }

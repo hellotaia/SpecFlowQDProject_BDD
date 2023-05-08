@@ -374,14 +374,14 @@ testRunner.Then("User verifies that \'Salary\' coulumn values are sorted in asce
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify deleting rows")]
+        [NUnit.Framework.DescriptionAttribute("Web Tables - Verify deleting rows")]
         [NUnit.Framework.CategoryAttribute("webtables")]
-        public void VerifyDeletingRows()
+        public void WebTables_VerifyDeletingRows()
         {
             string[] tagsOfScenario = new string[] {
                     "webtables"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify deleting rows", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Web Tables - Verify deleting rows", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 86
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -394,6 +394,21 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 6
 this.FeatureBackground();
+#line hidden
+#line 87
+testRunner.Given("User choose \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 88
+testRunner.When("User clicks \'Web Tables\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 89
+testRunner.Then("\'Web Tables\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 91
+testRunner.When("User clicks Delete button in the 2 row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 93
+testRunner.Then("User verifies that 2 rows in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -408,7 +423,7 @@ this.FeatureBackground();
                     "buttons"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BBBBBB", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 96
+#line 100
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))

@@ -67,6 +67,19 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
             _elementsPage.IsColumnSortedAsc(columnName);
         }
 
+        [When(@"User clicks Delete button in the (.*) row")]
+        public void WhenUserClicksDeleteButtonInTheRow(int row)
+        {
+            _elementsPage.DeleteRow(row);
+        }
+
+
+        [Then(@"User verifies that (.*) rows in the table")]
+        public void ThenUserVerifiesThatRowsInTheTable(int rowscount)
+        {
+            _elementsPage.GetRowCount();
+        }
+
 
     }
 }

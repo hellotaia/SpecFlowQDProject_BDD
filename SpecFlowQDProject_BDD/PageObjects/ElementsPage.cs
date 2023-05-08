@@ -51,8 +51,9 @@ namespace SpecFlowQDProject_BDD.PageObjects
                 var tableRowValues = tableRows[i].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToArray();
                 table.AddRow(tableRowValues);
             }
-            return this;
             Assert.AreEqual(expectedData, table, "The actual table data does not match the expected table data.");
+            return this;
+            
         }
 
        
@@ -151,8 +152,7 @@ namespace SpecFlowQDProject_BDD.PageObjects
 
         public ElementsPage DeleteRow(int rowIndex)
         {
-            IWebElement row = driver.FindElement(By.XPath($"(//div[@class='rt-tr-group'])[{rowIndex}]"));
-            IWebElement deleteButton = row.FindElement(By.XPath(".//div[@class='action-buttons']/span[contains(@class, 'delete')]"));
+            IWebElement deleteButton = driver.FindElement(By.XPath($"//span[@id='delete-record-{rowIndex}']"));
             deleteButton.Click();
             return this;
         }

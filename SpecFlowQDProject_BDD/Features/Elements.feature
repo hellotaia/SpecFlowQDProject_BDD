@@ -83,10 +83,14 @@ Then User verifies that 'Salary' coulumn values are sorted in ascending order
 
 
 @webtables
-Scenario: Verify deleting rows
-# Удалить вторую строку(имя Alden). 
-
+Scenario: Web Tables - Verify deleting rows
+Given User choose 'Elements' category
+When User clicks 'Web Tables' menu button
+Then 'Web Tables' page is displayed
+# Удалить вторую строку(имя Alden).
+When User clicks Delete button in the 2 row
 # Проверить что в таблице осталось только две строки
+Then User verifies that 2 rows in the table
 
 # и что среди значений в столбце Department нет значения "Compliance"
 

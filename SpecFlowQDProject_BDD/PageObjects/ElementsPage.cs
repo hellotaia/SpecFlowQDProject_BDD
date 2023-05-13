@@ -1,55 +1,192 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Support.UI;
 
 namespace SpecFlowQDProject_BDD.PageObjects
 {
-    public class ElementsPage
+    public class ElementsPage : BasePage
     {
-
-        private IWebDriver driver;
-
-        public ElementsPage(IWebDriver driver)
+        public ElementsPage(IWebDriver driver):base(driver)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException(nameof(driver));
-            }
-
-            this.driver = driver;
         }
 
-        //text box elements
+     //text box elements
         public IWebElement FullName => driver.FindElement(By.XPath("//input[@id='userName']"));
         public IWebElement Email => driver.FindElement(By.XPath("//input[@id='userEmail']"));
         public IWebElement CurrentAddress => driver.FindElement(By.XPath("//textarea[@id='currentAddress']"));
         public IWebElement PermanentAddress => driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
         public IWebElement SubmitButton => driver.FindElement(By.XPath("//button[@id='submit']"));
+        private IList<IWebElement> TableRowsLocator => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));
+     //check box elements
+        private IWebElement FolderLocator(string folderName) =>
+            driver.FindElement(By.XPath($"//span[text()='{folderName}']"));
+        private IWebElement ToggleLocator(string folderName) =>
+            driver.FindElement(By.XPath($"//span[text()='{folderName}']/ancestor::li[1]/span/button"));
 
-        public void FillTextBoxForm(Table table)
+        private IList<IWebElement> SelectResultLocator =>
+            driver.FindElements(By.XPath("//div[@id='result']/span[text()]"));
+     // web tables elements
+        private IWebElement WebTableHeaderLocator(string columnName) =>
+            driver.FindElement(By.XPath($"//div[@class='rt-resizable-header-content'][text()='{columnName}']"));
+        IReadOnlyCollection<IWebElement> tableRows => driver.FindElements(By.XPath("//div[@class='rt-tr-group']"));
+
+        //text box methods
+        public ElementsPage FillTextBoxForm(Table tableData)
         {
-            var fullName = table.Rows[0]["Full Name"];
-            var email = table.Rows[0]["Email"];
-            var currentAddress = table.Rows[0]["Current Address"];
-            var permanentAddress = table.Rows[0]["Permanent Address"];
+            var expectedData = tableData.Rows[0];
+            var fullName = expectedData["Full Name"];
+            var email = expectedData["Email"];
+            var currentAddress = expectedData["Current Address"];
+            var permanentAddress = expectedData["Permanent Address"];
 
- 
             FullName.SendKeys(fullName);
-
             Email.SendKeys(email);
-
             CurrentAddress.SendKeys(currentAddress);
- 
             PermanentAddress.SendKeys(permanentAddress);
 
+            return this;
+        }
+        public ElementsPage VerifyDataAtTheTable(Table expectedData)
+        {
+            var tElement = driver.FindElement(By.Id("output")).Text;
+
+            var tableRows = tElement.Split("\n");
+            for (int i = 0; i < tableRows.Length; i++)
+            {
+                tableRows[i] = tableRows[i].Trim();
+            }
+            var tableColumns = tableRows[0].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToList();
+
+            var table = new Table(tableColumns.ToArray());
+
+            for (int i = 1; i < tableRows.Length; i++)
+            {
+                var tableRowValues = tableRows[i].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToArray();
+                table.AddRow(tableRowValues);
+            }
+            Assert.AreEqual(expectedData, table, "The actual table data does not match the expected table data.");
+            return this;
+            
         }
 
-        public IList<IWebElement> TableRows => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));
+        //check box methods
+        public ElementsPage ClickFolderName(string folderName)
+        {
+            FolderLocator(folderName).Click();
+            return this;
+        }
+        public ElementsPage ClickToggleName (string folderName)
+        {
+            ToggleLocator(folderName).Click(); 
+            return this;
+        }
+        public ElementsPage CheckSelectResults(string expectedSelected)
+        {
+            var expectedString = expectedSelected;
+            List<string> elementTexts = new List<string>();
+            foreach (IWebElement element in SelectResultLocator)
+            {
+                elementTexts.Add(element.Text);
+            }
+            string actualString = string.Join(" ", elementTexts);
+            Assert.AreEqual(expectedString, actualString);
+            return this;
+        }
 
+       //web tables methods
+        public ElementsPage SortColumnAsc (string columnName)
+        {
+            WebTableHeaderLocator(columnName).Click();
+            return this;
+        }
+        public bool IsColumnSortedAsc(string columnName)
+        {
+            int columnIndex = GetColumnIndex(columnName);
+            var rows = tableRows;
+            string previousValue = "";
+            foreach (IWebElement row in rows)
+            {
+                IReadOnlyCollection<IWebElement> cells = row.FindElements(By.XPath(".//div[@class='rt-td']"));
+                string value = cells.ElementAt(columnIndex).Text;
+                if (previousValue != "" && String.Compare(previousValue, value) > 0)
+                {
+                    return false;
+                }
+                previousValue = value;
+            }
+            return true;
+        }
+        private int GetColumnIndex(string columnName)
+        {
+            IReadOnlyCollection<IWebElement> headers = driver.FindElements(By.XPath("//div[@class='rt-resizable-header-content']"));
+            for (int i = 0; i < headers.Count; i++)
+            {
+                if (headers.ElementAt(i).Text.Equals(columnName))
+                {
+                    return i;
+                }
+            }
+            throw new NoSuchElementException($"Column '{columnName}' not found");
+        }
+        public int GetRowCount()
+        {
+            var rows = tableRows;
+            return rows.Count;
+        }
+        public ElementsPage DeleteRow(int rowIndex)
+        {
+            IWebElement deleteButton = driver.FindElement(By.XPath($"//span[@id='delete-record-{rowIndex}']"));
+            deleteButton.Click();
+            return this;
+        }
+        public bool VerifyMissingValue (string columnName, string value)
+        {
+            int columnIndex = GetColumnIndex(columnName);
+            var rows = tableRows;
+            foreach (IWebElement row in rows)
+            {
+                IReadOnlyCollection<IWebElement> cells = row.FindElements(By.XPath(".//div[@class='rt-td']"));
+                string columnValue = cells.ElementAt(columnIndex).Text;
+                if (columnValue.Equals(value))
+                {
+                    return false;
+                }
+            }
+            Assert.IsTrue(true);
+            return true;
+        }
+        
+        // buttons methods
+        public ElementsPage ClickButtonName ( string buttonName)
+        {
+            var button = driver.FindElement(By.XPath($"//button[text() = '{buttonName}']"));
+            var actions = new Actions(driver);
+            switch (buttonName)
+            {
+                case "Click Me":
+                    actions.Click(button).Build().Perform(); 
+                    break;
+                case "Double Click Me":
+                    actions.DoubleClick(button).Build().Perform();
+                    break;
+                case "Right Click Me":
+                    actions.ContextClick(button).Build().Perform();
+                    break;
+                default:
+                    Assert.Fail($"Button '{buttonName}' not recognized.");
+                    break;
+            }
+            return this;
+        }
+        public ElementsPage VerifyMsgText(string expectedText)
+        {
+            var message = driver.FindElement(By.XPath("//div/p[text()]"));
+            Assert.That(message.Text, Is.EqualTo(expectedText));
+            return this;
+        }
 
+        
     }
 }

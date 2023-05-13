@@ -1,52 +1,109 @@
-using System;
-using TechTalk.SpecFlow;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using TechTalk.SpecFlow;
 using SpecFlowQDProject_BDD.PageObjects;
+
+
 
 namespace SpecFlowQDProject_BDD.StepDefinitions
 {
     [Binding]
     public class ElementsStepDefinitions
     {
-        private IWebDriver driver;
-        private ElementsPage elementsPage;
+        private IWebDriver _driver;
+        private ElementsPage _elementsPage;
 
-        public ElementsStepDefinitions(Hooks hooks)
+        public ElementsStepDefinitions(IWebDriver driver)
         {
-            driver = hooks.GetDriver();
-            elementsPage = new ElementsPage(driver);
+            _driver = driver;
+            _elementsPage = new ElementsPage(_driver);
         }
 
-
+        //text box page
         [When(@"User fills the fields with the following values:")]
         public void WhenUserFillsTheFieldsWithTheFollowingValues(Table table)
         {
-            elementsPage.FillTextBoxForm(table);
+          _elementsPage.FillTextBoxForm(table);
         }
 
-
+        //text box page
         [Then(@"the following table is in the response")]
-        public void ThenTheFollowingTableIsInTheResponse(Table table)
+        public void ThenTheFollowingTableIsInTheResponse(Table expectedData)
         {
-            var expectedTableRows = table.Rows;
-            var actualTableRows = elementsPage.TableRows;
+            _elementsPage.VerifyDataAtTheTable(expectedData);
 
-            Assert.AreEqual(expectedTableRows.Count, actualTableRows.Count);
-
-            for (int i = 0; i < expectedTableRows.Count; i++)
-            {
-                var expectedRow = expectedTableRows[i];
-                var actualRowCells = actualTableRows[i].FindElements(By.TagName("td"));
-
-                Assert.AreEqual(expectedRow["FullName"], actualRowCells[0].Text);
-                Assert.AreEqual(expectedRow["Email"], actualRowCells[1].Text);
-                Assert.AreEqual(expectedRow["Current Address"], actualRowCells[2].Text);
-                Assert.AreEqual(expectedRow["Permanent Address"], actualRowCells[3].Text);
-            }
         }
+
+        // check box page
+        [When(@"User selects '([^']*)' folder")]
+        public void WhenUserSelectsFolder(string folderName)
+        {
+            _elementsPage.ClickFolderName(folderName);
+        }
+
+        // check box page
+        [When(@"User expands '([^']*)' folder")]
+        public void WhenUserExpandsFolder(string folderName)
+        {
+            _elementsPage.ClickToggleName(folderName);
+        }
+
+        // check box page
+        [Then(@"User verifies that '([^']*)' is displayed for selected results")]
+        public void ThenUserVerifiesThatIsDisplayedForSelectedResults(string results)
+        {
+            _elementsPage.CheckSelectResults(results);
+        }
+
+        // web tables page
+        [When(@"User clicks '([^']*)' column header")]
+        public void WhenUserClicksColumnHeader(string columnName)
+        {
+            _elementsPage.SortColumnAsc(columnName);
+        }
+
+        // web tables page
+        [Then(@"User verifies that '([^']*)' coulumn values are sorted in ascending order")]
+        public void ThenUserVerifiesThatCoulumnValuesAreSortedInAscendingOrder(string columnName)
+        {
+            _elementsPage.IsColumnSortedAsc(columnName);
+        }
+        // web tables page
+        [When(@"User clicks Delete button in the (.*) row")]
+        public void WhenUserClicksDeleteButtonInTheRow(int row)
+        {
+            _elementsPage.DeleteRow(row);
+        }
+
+        // web tables page
+        [Then(@"User verifies that (.*) rows in the table")]
+        public void ThenUserVerifiesThatRowsInTheTable(int rowscount)
+        {
+            _elementsPage.GetRowCount();
+        }
+        // web tables page
+        [Then(@"User verifies that '([^']*)' column does not contain '([^']*)' value")]
+        public void ThenUserVerifiesThatColumnDoesNotContainValue(string column, string value)
+        {
+            _elementsPage.VerifyMissingValue(column,value);
+        }
+
+        //buttons page
+        [When(@"User clicks '([^']*)' button on the Buttons page")]
+        public void WhenUserClicksButtonOnTheButtonsPage(string buttonName)
+        {
+           _elementsPage.ClickButtonName(buttonName);
+        }
+
+
+        // buttons page
+        [Then(@"User verifies that '([^']*)' displays")]
+        public void ThenUserVerifiesThatDisplays(string expectedText)
+        {
+            _elementsPage.VerifyMsgText(expectedText);
+        }
+
+
+
+
     }
 }

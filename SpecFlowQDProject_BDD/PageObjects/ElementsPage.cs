@@ -18,7 +18,7 @@ namespace SpecFlowQDProject_BDD.PageObjects
         public IWebElement CurrentAddress => driver.FindElement(By.XPath("//textarea[@id='currentAddress']"));
         public IWebElement PermanentAddress => driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
         public IWebElement SubmitButton => driver.FindElement(By.XPath("//button[@id='submit']"));
-        private IList<IWebElement> TableRowsLocator => driver.FindElements(By.XPath("//table[@class='table']//tbody//tr"));
+        private IList<IWebElement> TableRowsLocator => driver.FindElements(By.XPath("//div[@id='output']//p"));
      //check box elements
         private IWebElement FolderLocator(string folderName) =>
             driver.FindElement(By.XPath($"//span[text()='{folderName}']"));
@@ -50,23 +50,12 @@ namespace SpecFlowQDProject_BDD.PageObjects
         }
         public ElementsPage VerifyDataAtTheTable(Table expectedData)
         {
-            var tElement = driver.FindElement(By.Id("output")).Text;
-
-            var tableRows = tElement.Split("\n");
-            for (int i = 0; i < tableRows.Length; i++)
+            var expectedTableRows = expectedData.Rows;
+            Assert.AreEqual(expectedTableRows.Count, TableRowsLocator.Count, "Number of rows in the table was incorrect"); 
+            for (int i = 0; i < expectedTableRows.Count; i++)
             {
-                tableRows[i] = tableRows[i].Trim();
+                Assert.AreEqual(expectedTableRows[i]["TableValues"], TableRowsLocator[i].Text, "Value at the table was inncorect");
             }
-            var tableColumns = tableRows[0].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToList();
-
-            var table = new Table(tableColumns.ToArray());
-
-            for (int i = 1; i < tableRows.Length; i++)
-            {
-                var tableRowValues = tableRows[i].Split("|").Where(c => !string.IsNullOrWhiteSpace(c)).Select(c => c.Trim()).ToArray();
-                table.AddRow(tableRowValues);
-            }
-            Assert.AreEqual(expectedData, table, "The actual table data does not match the expected table data.");
             return this;
             
         }

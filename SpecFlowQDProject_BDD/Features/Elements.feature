@@ -23,6 +23,7 @@ When User fills the fields with the following values:
 And User clicks 'Submit' button
 # Проверяем что все данные в появившейся таблице равны ранее введенным.
 Then the following table is in the response
+| TableValues                     |
 | Name:test                       |
 | Email:test@email.com            |
 | Current Address :test ad        |

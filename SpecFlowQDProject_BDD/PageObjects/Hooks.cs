@@ -19,14 +19,15 @@ namespace SpecFlowQDProject_BDD.PageObjects
         public void GetDriver()
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
             container.RegisterInstanceAs(driver);
         }
 
-        //[AfterScenario]
-        //public void AfterScenario()
-        //{
-        //    IWebDriver driver = container.Resolve<IWebDriver>();
-        //    driver.Quit();
-        //}
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            IWebDriver driver = container.Resolve<IWebDriver>();
+            driver.Quit();
+        }
     }
 }

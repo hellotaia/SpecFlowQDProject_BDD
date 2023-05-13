@@ -410,19 +410,32 @@ testRunner.When("User clicks Delete button in the 2 row", ((string)(null)), ((Te
 #line 93
 testRunner.Then("User verifies that 2 rows in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 95
+testRunner.And("User verifies that \'Department\' column does not contain \'Compliance\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("BBBBBB")]
+        [NUnit.Framework.DescriptionAttribute("Buttons - Clicking different buttons")]
         [NUnit.Framework.CategoryAttribute("buttons")]
-        public void BBBBBB()
+        [NUnit.Framework.TestCaseAttribute("Click Me", "You have done a dynamic click", null)]
+        [NUnit.Framework.TestCaseAttribute("Double Click Me", "You have done a double click", null)]
+        [NUnit.Framework.TestCaseAttribute("Right Click Me", "You have done a right click", null)]
+        public void Buttons_ClickingDifferentButtons(string buttonName, string expectedMsg, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "buttons"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BBBBBB", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            argumentsOfScenario.Add("buttonName", buttonName);
+            argumentsOfScenario.Add("expectedMsg", expectedMsg);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Buttons - Clicking different buttons", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 100
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -435,6 +448,21 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 6
 this.FeatureBackground();
+#line hidden
+#line 101
+testRunner.Given("User choose \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 102
+testRunner.When("User clicks \'Buttons\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 103
+testRunner.Then("\'Buttons\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 111
+testRunner.When(string.Format("User clicks \'{0}\' button on the Buttons page", buttonName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 112
+testRunner.Then(string.Format("User verifies that \'{0}\' displays", expectedMsg), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -91,11 +91,28 @@ Then 'Web Tables' page is displayed
 When User clicks Delete button in the 2 row
 # Проверить что в таблице осталось только две строки
 Then User verifies that 2 rows in the table
-
 # и что среди значений в столбце Department нет значения "Compliance"
+And User verifies that 'Department' column does not contain 'Compliance' value
 
 
 ## Раздел Buttons
 @buttons
-Scenario:BBBBBB
+Scenario Outline: Buttons - Clicking different buttons
+Given User choose 'Elements' category
+When User clicks 'Buttons' menu button
+Then 'Buttons' page is displayed
+# Написать один сценарий с Examples.
 
+#добавьте степ который принимает в себя название кнопки (например Double Click Me).
+
+# Дальше это значение должно передаваться в метод, внутри которого будет switch который в зависимости от значения будет выполнять разные действия с кнопкой.
+
+#В каждом экзампле кликаем определенным образом по кнопке и проверяем что появился соответствующий текст (например "You have done a right click").
+When User clicks '<buttonName>' button on the Buttons page
+Then User verifies that '<expectedMsg>' displays
+
+Examples: 
+| buttonName      | expectedMsg                   |
+| Click Me        | You have done a dynamic click |
+| Double Click Me | You have done a double click  |
+| Right Click Me  | You have done a right click   |

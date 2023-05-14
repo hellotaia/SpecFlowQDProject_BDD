@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using NUnit.Framework;
+using OpenQA.Selenium.Interactions;
 
 namespace SpecFlowQDProject_BDD.PageObjects
 {
@@ -10,6 +11,8 @@ namespace SpecFlowQDProject_BDD.PageObjects
         }
         private IWebElement CategoryNameLocator(string category) => driver.FindElement(By.XPath($"//div/h5[text()='{category}']"));
         private IWebElement PageTitleLocator => driver.FindElement(By.XPath($"//div[@class='main-header']"));
+        private IWebElement MenuButtonLocator(string buttonName) => driver.FindElement(By.XPath($"//span[text()='{buttonName}']"));
+        private IWebElement ButtonByNameLocator(string buttonName) => driver.FindElement(By.XPath($"//button[text()='{buttonName}']"));
 
         public HomePage NavigateToPage (string pageUrl)
         {
@@ -41,7 +44,12 @@ namespace SpecFlowQDProject_BDD.PageObjects
             return this;
         }
 
-        private IWebElement MenuButtonLocator(string buttonName) => driver.FindElement(By.XPath($"//span[text()='{buttonName}']"));
-        private IWebElement ButtonByNameLocator(string buttonName) => driver.FindElement(By.XPath($"//button[text()='{buttonName}']"));
+        public HomePage PressButton(string keyButton) 
+        {
+            Actions actions = new Actions(driver);
+            actions.SendKeys(keyButton).Perform();
+            return this;
+        }
+       
     }
 }

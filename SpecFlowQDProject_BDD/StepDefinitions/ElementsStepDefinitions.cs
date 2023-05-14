@@ -94,16 +94,11 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
            _elementsPage.ClickButtonName(buttonName);
         }
 
-
         // buttons page
         [Then(@"User verifies that '([^']*)' displays")]
         public void ThenUserVerifiesThatDisplays(string expectedText)
         {
             _elementsPage.VerifyMsgText(expectedText);
         }
-
-
-
-
     }
 }

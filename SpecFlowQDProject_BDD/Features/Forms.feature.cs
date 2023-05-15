@@ -160,15 +160,21 @@ testRunner.And("User selects \'Reading\' hobbie value", ((string)(null)), ((Tech
 testRunner.And("User selects \'Music\' hobbie value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 36
-testRunner.And("User press \'Enter\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("User press \'Enter\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 44
+#line 38
+testRunner.And("User selects \'Uttar Pradesh\' in \'State\' dropdown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 40
+testRunner.And("User selects \'Merrut\' in \'City\' dropdown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 42
 testRunner.And("User uploads picture file", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 47
+#line 44
 testRunner.And("User clicks \'Submit\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 49
+#line 46
 testRunner.Then("\'Thanks for submitting the form\' modal is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -194,7 +200,7 @@ testRunner.Then("\'Thanks for submitting the form\' modal is displayed", ((strin
                             "Physics, Maths"});
                 table4.AddRow(new string[] {
                             "Hobbies",
-                            "Reading,Music"});
+                            "Reading, Music"});
                 table4.AddRow(new string[] {
                             "Picture",
                             "1.png"});
@@ -203,8 +209,8 @@ testRunner.Then("\'Thanks for submitting the form\' modal is displayed", ((strin
                             "Oak str, 12"});
                 table4.AddRow(new string[] {
                             "State and City",
-                            ""});
-#line 50
+                            "Uttar Pradesh Merrut"});
+#line 47
 testRunner.Then("User verifies that following values are displayed in the modal", ((string)(null)), table4, "Then ");
 #line hidden
             }

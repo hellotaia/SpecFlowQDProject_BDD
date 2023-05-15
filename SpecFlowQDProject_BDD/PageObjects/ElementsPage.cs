@@ -15,10 +15,14 @@ namespace SpecFlowQDProject_BDD.PageObjects
      //text box elements
         public IWebElement FullName => driver.FindElement(By.XPath("//input[@id='userName']"));
         public IWebElement Email => driver.FindElement(By.XPath("//input[@id='userEmail']"));
-        public IWebElement CurrentAddress => driver.FindElement(By.XPath("//textarea[@id='currentAddress']"));
-        public IWebElement PermanentAddress => driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
-        public IWebElement SubmitButton => driver.FindElement(By.XPath("//button[@id='submit']"));
-        private IList<IWebElement> TableRowsLocator => driver.FindElements(By.XPath("//div[@id='output']//p"));
+        public IWebElement CurrentAddress => 
+            driver.FindElement(By.XPath("//textarea[@id='currentAddress']"));
+        public IWebElement PermanentAddress => 
+            driver.FindElement(By.XPath("//textarea[@id='permanentAddress']"));
+        public IWebElement SubmitButton => 
+            driver.FindElement(By.XPath("//button[@id='submit']"));
+        private IList<IWebElement> TableRowsLocator => 
+            driver.FindElements(By.XPath("//div[@id='output']//p"));
      //check box elements
         private IWebElement FolderLocator(string folderName) =>
             driver.FindElement(By.XPath($"//span[text()='{folderName}']"));
@@ -30,7 +34,8 @@ namespace SpecFlowQDProject_BDD.PageObjects
      // web tables elements
         private IWebElement WebTableHeaderLocator(string columnName) =>
             driver.FindElement(By.XPath($"//div[@class='rt-resizable-header-content'][text()='{columnName}']"));
-        IReadOnlyCollection<IWebElement> tableRows => driver.FindElements(By.XPath("//div[@class='rt-tr-group']"));
+        IReadOnlyCollection<IWebElement> tableRows => 
+            driver.FindElements(By.XPath("//div[@class='rt-tr-group']"));
 
         //text box methods
         public ElementsPage FillTextBoxForm(Table tableData)

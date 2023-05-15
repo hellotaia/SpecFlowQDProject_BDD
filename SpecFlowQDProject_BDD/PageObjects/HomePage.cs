@@ -9,10 +9,14 @@ namespace SpecFlowQDProject_BDD.PageObjects
        public HomePage(IWebDriver driver) : base(driver)
         {
         }
-        private IWebElement CategoryNameLocator(string category) => driver.FindElement(By.XPath($"//div/h5[text()='{category}']"));
-        private IWebElement PageTitleLocator => driver.FindElement(By.XPath($"//div[@class='main-header']"));
-        private IWebElement MenuButtonLocator(string buttonName) => driver.FindElement(By.XPath($"//span[text()='{buttonName}']"));
-        private IWebElement ButtonByNameLocator(string buttonName) => driver.FindElement(By.XPath($"//button[text()='{buttonName}']"));
+        private IWebElement CategoryNameLocator(string category) => 
+            driver.FindElement(By.XPath($"//div/h5[text()='{category}']"));
+        private IWebElement PageTitleLocator => 
+            driver.FindElement(By.XPath($"//div[@class='main-header']"));
+        private IWebElement MenuButtonLocator(string buttonName) => 
+            driver.FindElement(By.XPath($"//span[text()='{buttonName}']"));
+        private IWebElement ButtonByNameLocator(string buttonName) => 
+            driver.FindElement(By.XPath($"//button[text()='{buttonName}']"));
 
         public HomePage NavigateToPage (string pageUrl)
         {

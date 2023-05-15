@@ -2,12 +2,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpecFlowQDProject_BDD.PageObjects
 {
@@ -32,14 +26,19 @@ namespace SpecFlowQDProject_BDD.PageObjects
             driver.FindElement(By.XPath($"//label[text()='{hobbieValue}']/preceding-sibling::input[@type='checkbox']"));
         //statecity element
         public IWebElement DropdownNameLocator(string dropdownName) =>
-            driver.FindElement(By.XPath($"//div[@id='{dropdownName}']/div/div"));
+            driver.FindElement(By.XPath($"//div[text()='Select {dropdownName}']"));
+        public IWebElement DropdownValueLocator (string dropdownValue) => 
+            driver.FindElement(By.XPath($"//div[text()='{dropdownValue}']"));
 
         //submit modal elements
         public IWebElement ModalHeader(string header) => 
             driver.FindElement(By.XPath($"//div[@class='modal-header']/div[text()='{header}']"));
-        private IList<IWebElement> TableRowsLocator => driver.FindElements(By.XPath("//tbody/tr"));
-        private IList<IWebElement> TableLabelLocator => driver.FindElements(By.XPath("//tbody/tr/td[1]"));
-        private IList<IWebElement> TableValuelLocator => driver.FindElements(By.XPath("//tbody/tr/td[2]"));
+        private IList<IWebElement> TableRowsLocator => 
+            driver.FindElements(By.XPath("//tbody/tr"));
+        private IList<IWebElement> TableLabelLocator => 
+            driver.FindElements(By.XPath("//tbody/tr/td[1]"));
+        private IList<IWebElement> TableValuelLocator => 
+            driver.FindElements(By.XPath("//tbody/tr/td[2]"));
 
         public FormsPage FillFormFields(Table tableData)
         {
@@ -78,32 +77,29 @@ namespace SpecFlowQDProject_BDD.PageObjects
         public FormsPage FillSubject(string subjectValue)
         {
             var actions = new Actions(driver);
-            actions.SendKeys(Keys.Enter).Perform();
+            actions.Click(SubjectField);
             SubjectField.SendKeys(subjectValue);
+            actions.SendKeys(Keys.Enter).Perform();           
             return this;
         }
 
         public FormsPage SelectHobbies(string hobbiesValue) 
         {
-            var hcheckbox = HobbiesCheckbox(hobbiesValue);
-
             var actions = new Actions(driver);
-            actions.MoveToElement(hcheckbox).Click().Perform();
+            actions.MoveToElement(HobbiesCheckbox(hobbiesValue)).Perform();
+            actions.Click(HobbiesCheckbox(hobbiesValue)).Perform();
+            actions.Click();
             return this;
         }
 
         public FormsPage SelectStateCityDropdown (string dropdownValue, string dropdownName) 
         {
-            //choose dropdown
-            var dropdown = DropdownNameLocator(dropdownName);
             var actions = new Actions(driver);
-            actions.MoveToElement(dropdown).Click().Perform();
-            dropdown.SendKeys(dropdownValue);
-
-            // choose option
-/*            var option = driver.FindElement(De menu!!!!!!!!!!));
-            option.Click();*/
-            // dropdown.SendKeys(dropdownValue);
+            DropdownNameLocator(dropdownName).Click();
+            actions.SendKeys(dropdownValue);
+            actions.MoveToElement(DropdownValueLocator(dropdownValue))
+                .Click()
+                .Perform();
             return this;
         }
 
@@ -129,10 +125,10 @@ namespace SpecFlowQDProject_BDD.PageObjects
                 var expectedLabel = expectedTableRows[i]["Label"];
                 var expectedValue = expectedTableRows[i]["Value"];
 
-                var actuallabelValue = TableLabelLocator[i].Text;
-                var actualValue = TableValuelLocator[i].Text;
-                Assert.AreEqual(expectedLabel, actuallabelValue, "Label at the table was incorrect");
-                Assert.AreEqual(expectedValue, actualValue, "Value at the table was incorrect");
+                Assert.AreEqual(expectedLabel, TableLabelLocator[i].Text, 
+                    "Label at the table was incorrect");
+                Assert.AreEqual(expectedValue, TableValuelLocator[i].Text, 
+                    "Value at the table was incorrect");
             }
             return this;
         }

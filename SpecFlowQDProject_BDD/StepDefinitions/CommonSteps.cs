@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using SpecFlowQDProject_BDD.PageObjects;
 
 namespace SpecFlowQDProject_BDD.StepDefinitions
@@ -22,6 +23,7 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
             _homePage.NavigateToPage(pageUrl);
         }
 
+        [When(@"User choose '([^']*)' category")]
         [Given(@"User choose '([^']*)' category")]
         public void WhenUserChooseCategory(string category)
         {
@@ -44,6 +46,13 @@ namespace SpecFlowQDProject_BDD.StepDefinitions
         {
             _homePage.VerifyPageTitle(pageName);
         }
+
+        [When(@"User press '([^']*)' button")]
+        public void WhenUserPressButton(string keyButton)
+        {
+            _homePage.PressButton(keyButton);
+        }
+
 
     }
 }

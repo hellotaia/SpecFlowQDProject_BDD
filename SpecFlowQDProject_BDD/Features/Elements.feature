@@ -75,8 +75,6 @@ Scenario: Web Tables - Verify that Salary column is displaying in ascending orde
 Given User choose 'Elements' category
 When User clicks 'Web Tables' menu button
 Then 'Web Tables' page is displayed
-#When User verifies that table contais the following columns
-#| First Name | Last Name | Age | Email | Salary | Department | Action |
 # Кликнуть по столбцу Salary. 
 When User clicks 'Salary' column header
 # Проверить что значения в столбце Salary расположены по возрастанию.
@@ -103,11 +101,8 @@ Given User choose 'Elements' category
 When User clicks 'Buttons' menu button
 Then 'Buttons' page is displayed
 # Написать один сценарий с Examples.
-
-#добавьте степ который принимает в себя название кнопки (например Double Click Me).
-
+# добавьте степ который принимает в себя название кнопки (например Double Click Me).
 # Дальше это значение должно передаваться в метод, внутри которого будет switch который в зависимости от значения будет выполнять разные действия с кнопкой.
-
 #В каждом экзампле кликаем определенным образом по кнопке и проверяем что появился соответствующий текст (например "You have done a right click").
 When User clicks '<buttonName>' button on the Buttons page
 Then User verifies that '<expectedMsg>' displays

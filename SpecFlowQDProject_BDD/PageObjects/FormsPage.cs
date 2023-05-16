@@ -11,7 +11,8 @@ namespace SpecFlowQDProject_BDD.PageObjects
         {
         }
         //text fields elements
-        public IWebElement FieldLocator(string fieldValue) => driver.FindElement(By.XPath($"//*[@placeholder='{fieldValue}']"));
+        public IWebElement FieldLocator(string fieldValue) => 
+            driver.FindElement(By.XPath($"//*[@placeholder='{fieldValue}']"));
 
         //gender radio button elements
         public IWebElement GenderLocator(string genderValue) => 

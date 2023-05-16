@@ -365,10 +365,10 @@ testRunner.When("User clicks \'Web Tables\' menu button", ((string)(null)), ((Te
 #line 77
 testRunner.Then("\'Web Tables\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 81
+#line 79
 testRunner.When("User clicks \'Salary\' column header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 83
+#line 81
 testRunner.Then("User verifies that \'Salary\' coulumn values are sorted in ascending order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -384,7 +384,7 @@ testRunner.Then("User verifies that \'Salary\' coulumn values are sorted in asce
                     "webtables"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Web Tables - Verify deleting rows", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 87
+#line 85
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -397,22 +397,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 88
+#line 86
 testRunner.Given("User choose \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 89
+#line 87
 testRunner.When("User clicks \'Web Tables\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 90
+#line 88
 testRunner.Then("\'Web Tables\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 92
+#line 90
 testRunner.When("User clicks Delete button in the 2 row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 94
+#line 92
 testRunner.Then("User verifies that 2 rows in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 96
+#line 94
 testRunner.And("User verifies that \'Department\' column does not contain \'Compliance\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -438,7 +438,7 @@ testRunner.And("User verifies that \'Department\' column does not contain \'Comp
             argumentsOfScenario.Add("buttonName", buttonName);
             argumentsOfScenario.Add("expectedMsg", expectedMsg);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Buttons - Clicking different buttons", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 101
+#line 99
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -451,19 +451,19 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 102
+#line 100
 testRunner.Given("User choose \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 103
+#line 101
 testRunner.When("User clicks \'Buttons\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 104
+#line 102
 testRunner.Then("\'Buttons\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 112
+#line 107
 testRunner.When(string.Format("User clicks \'{0}\' button on the Buttons page", buttonName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 113
+#line 108
 testRunner.Then(string.Format("User verifies that \'{0}\' displays", expectedMsg), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

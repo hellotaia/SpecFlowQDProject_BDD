@@ -9,8 +9,6 @@ When User choose 'Forms' category
 Then 'Forms' page is displayed
 
 @practiceForm
-
-
 Scenario: Paractice Form - 
 When User clicks 'Practice Form' menu button
 Then 'Practice Form' page is displayed

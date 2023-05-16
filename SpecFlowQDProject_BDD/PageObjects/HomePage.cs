@@ -38,8 +38,16 @@ namespace SpecFlowQDProject_BDD.PageObjects
 
         public HomePage ClickOnMenuButton(string menuButtonName)
         {
+            ScrollToElement(MenuButtonLocator(menuButtonName));
             MenuButtonLocator(menuButtonName).Click();
             return this;
+        }
+
+        public void ScrollToElement(IWebElement element)
+        {
+            var jsExecutor = (IJavaScriptExecutor)driver;
+            jsExecutor.ExecuteScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'})", element);
+            Thread.Sleep(500);
         }
 
         public HomePage ClickButton(string buttonName)

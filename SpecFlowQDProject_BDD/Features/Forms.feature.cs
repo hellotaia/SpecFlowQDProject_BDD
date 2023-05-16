@@ -101,7 +101,7 @@ testRunner.Then("\'Forms\' page is displayed", ((string)(null)), ((TechTalk.Spec
                     "practiceForm"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Paractice Form -", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 14
+#line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -114,10 +114,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 15
+#line 13
 testRunner.When("User clicks \'Practice Form\' menu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 16
+#line 14
 testRunner.Then("\'Practice Form\' page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -138,43 +138,43 @@ testRunner.Then("\'Practice Form\' page is displayed", ((string)(null)), ((TechT
                 table3.AddRow(new string[] {
                             "Current Address",
                             "Oak str, 12"});
-#line 18
+#line 16
 testRunner.When("User fills the text fields with the following values:", ((string)(null)), table3, "When ");
 #line hidden
-#line 26
+#line 24
 testRunner.And("User selects \'Female\' gender radiobutton", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 28
+#line 26
 testRunner.And("User fills \'21 March 1976\' date of birth", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 30
+#line 28
 testRunner.And("User fills \'Physics\' subject", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 31
+#line 29
 testRunner.And("User fills \'Maths\' subject", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 33
+#line 31
 testRunner.And("User selects \'Reading\' hobbie value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 34
+#line 32
 testRunner.And("User selects \'Music\' hobbie value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 36
+#line 34
  testRunner.And("User press \'Enter\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 38
+#line 36
 testRunner.And("User selects \'Uttar Pradesh\' in \'State\' dropdown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 40
+#line 38
 testRunner.And("User selects \'Merrut\' in \'City\' dropdown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 42
+#line 40
 testRunner.And("User uploads picture file", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 44
+#line 42
 testRunner.And("User clicks \'Submit\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 46
+#line 44
 testRunner.Then("\'Thanks for submitting the form\' modal is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -210,7 +210,7 @@ testRunner.Then("\'Thanks for submitting the form\' modal is displayed", ((strin
                 table4.AddRow(new string[] {
                             "State and City",
                             "Uttar Pradesh Merrut"});
-#line 47
+#line 45
 testRunner.Then("User verifies that following values are displayed in the modal", ((string)(null)), table4, "Then ");
 #line hidden
             }

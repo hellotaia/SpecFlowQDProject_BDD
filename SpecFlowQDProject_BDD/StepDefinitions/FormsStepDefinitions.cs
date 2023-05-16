@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace SpecFlowQDProject_BDD.StepDefinitions
 {
     [Binding]
-    public class FormsStepDefinition
+    public class FormsStepDefinitions
     {
         private IWebDriver _driver;
         private FormsPage _formsPage;
 
-        public FormsStepDefinition(IWebDriver driver)
+        public FormsStepDefinitions(IWebDriver driver)
         {
             _driver = driver;
             _formsPage = new FormsPage(_driver);
